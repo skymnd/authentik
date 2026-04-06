@@ -3,3 +3,18 @@
 !.gitignore
 !*.template
 certs/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+crash.log
+crash.*.log
+backend.conf
+!.terraform.lock.hcl
