@@ -3,9 +3,10 @@ authentik_token = "your-api-token"
 
 admins = {
   alice = {
-    username = "alice"
-    name     = "Alice"
-    groups   = ["admins"]
+    username     = "alice"
+    name         = "Alice"
+    groups       = ["admins"]
+    admin_groups = ["photos"]
   }
 }
 
@@ -17,12 +18,12 @@ users = {
   bob = {
     username = "bob"
     name     = "Bob"
-    groups   = ["users"]
+    groups   = ["users", "photos"]
   }
   carol = {
     username = "carol"
     name     = "Carol"
-    groups   = ["users"]
+    groups   = ["users", "photos"]
   }
 }
 
@@ -52,6 +53,13 @@ oauth2_providers = {
     signing_key           = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     property_mappings     = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [{ url = "https://git.example.com/user/oauth2/authentik/callback" }]
+    application_name      = "Git"
+    application_slug      = "git"
+    meta_launch_url       = "https://git.example.com"
+    meta_description      = "Remote Code Repositories."
+    meta_publisher        = ""
+    meta_icon             = "application-icons/git.png"
+    application_group     = "Home"
   }
   graphs = {
     name                  = "Provider for Graphs"
@@ -61,6 +69,13 @@ oauth2_providers = {
     allowed_redirect_uris = [{ url = "https://graphs.example.com/login/generic_oauth" }]
     logout_method         = "frontchannel"
     logout_uri            = "https://graphs.example.com/logout"
+    application_name      = "Graphs"
+    application_slug      = "graphs"
+    meta_launch_url       = ""
+    meta_description      = "Dashboards."
+    meta_publisher        = ""
+    meta_icon             = "application-icons/graphs.svg"
+    application_group     = "Home"
   }
   photos = {
     name              = "Provider for Photos"
@@ -72,20 +87,13 @@ oauth2_providers = {
       { url = "https://photos.example.com/auth/login" },
       { url = "https://photos.example.com/user-settings" },
     ]
-  }
-  proxy = {
-    name                    = "Provider for Proxy"
-    client_id               = "your-client-id"
-    access_token_validity   = "hours=24"
-    refresh_token_threshold = "seconds=0"
-    property_mappings = [
-      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    ]
-    allowed_redirect_uris = [
-      { url = "https://proxy.example.com/outpost.goauthentik.io/callback?X-authentik-auth-callback=true" },
-      { url = "https://proxy.example.com?X-authentik-auth-callback=true" },
-    ]
+    application_name  = "Photos"
+    application_slug  = "photos"
+    meta_launch_url   = "https://photos.example.com/auth/login?autoLaunch=1"
+    meta_description  = "Self-hosted Photos."
+    meta_publisher    = ""
+    meta_icon         = "application-icons/photos.svg"
+    application_group = "Home"
   }
   virt = {
     name              = "Provider for Virt"
@@ -95,6 +103,13 @@ oauth2_providers = {
     logout_uri        = "https://virt.example.com:8006/#"
     property_mappings = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [{ url = "https://virt.example.com:8006" }]
+    application_name  = "Virt"
+    application_slug  = "virt"
+    meta_launch_url   = ""
+    meta_description  = "Virtualisation."
+    meta_publisher    = ""
+    meta_icon         = "application-icons/virt.svg"
+    application_group = "Home"
   }
 }
 
@@ -104,57 +119,13 @@ proxy_providers = {
     access_token_validity = "hours=24"
     external_host         = "https://proxy.example.com"
     mode                  = "forward_single"
-  }
-}
-
-applications = {
-  git = {
-    name             = "Git"
-    slug             = "git"
-    meta_launch_url  = "https://git.example.com"
-    meta_description = "Remote Code Repositories."
-    meta_icon        = "application-icons/git.png"
-    provider_id      = 1
-    group            = "Home"
-  }
-  graphs = {
-    name             = "Graphs"
-    slug             = "graphs"
-    meta_description = "Dashboards."
-    meta_icon        = "application-icons/graphs.svg"
-    provider_id      = 2
-    group            = "Home"
-  }
-  photos = {
-    name             = "Photos"
-    slug             = "photos"
-    meta_launch_url  = "https://photos.example.com/auth/login?autoLaunch=1"
-    meta_description = "Self-hosted Photos."
-    meta_icon        = "application-icons/photos.svg"
-    provider_id      = 3
-    group            = "Home"
-  }
-  media = {
-    name        = "Media"
-    slug        = "media"
-    provider_id = 4
-    group       = "Media"
-  }
-  proxy = {
-    name             = "Proxy"
-    slug             = "proxy"
-    meta_description = "Reverse Proxy."
-    meta_icon        = "application-icons/proxy.svg"
-    provider_id      = 5
-    group            = "Home"
-  }
-  virt = {
-    name             = "Virt"
-    slug             = "virt"
-    meta_description = "Virtualisation."
-    meta_icon        = "application-icons/virt.svg"
-    provider_id      = 6
-    group            = "Home"
+    application_name      = "Proxy"
+    application_slug      = "proxy"
+    meta_launch_url       = ""
+    meta_description      = "Reverse Proxy."
+    meta_publisher        = ""
+    meta_icon             = "application-icons/proxy.svg"
+    application_group     = "Home"
   }
 }
 

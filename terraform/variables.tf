@@ -13,9 +13,10 @@ variable "authentik_token" {
 variable "admins" {
   description = "Map of admin users (non-sensitive fields: username, name, groups)"
   type = map(object({
-    username = string
-    name     = string
-    groups   = optional(list(string), [])
+    username     = string
+    name         = string
+    groups       = optional(list(string), [])
+    admin_groups = optional(list(string), [])
   }))
   default = {}
 }
@@ -30,9 +31,10 @@ variable "admin_emails" {
 variable "users" {
   description = "Map of users (non-sensitive fields: username, name, groups)"
   type = map(object({
-    username = string
-    name     = string
-    groups   = optional(list(string), [])
+    username     = string
+    name         = string
+    groups       = optional(list(string), [])
+    admin_groups = optional(list(string), [])
   }))
   default = {}
 }
@@ -47,10 +49,11 @@ variable "user_emails" {
 variable "service_accounts" {
   description = "Map of service accounts to create"
   type = map(object({
-    username   = string
-    name       = string
-    groups     = optional(list(string), [])
-    attributes = optional(string, "{}")
+    username     = string
+    name         = string
+    groups       = optional(list(string), [])
+    admin_groups = optional(list(string), [])
+    attributes   = optional(string, "{}")
   }))
   default = {}
 }
@@ -75,11 +78,20 @@ variable "oauth2_providers" {
       url           = string
       matching_mode = optional(string, "strict")
     })), [])
-    signing_key       = optional(string)
-    property_mappings = optional(list(string), [])
-    sub_mode          = optional(string, "hashed_user_id")
-    logout_method     = optional(string, "backchannel")
-    logout_uri        = optional(string)
+    signing_key        = optional(string)
+    property_mappings  = optional(list(string), [])
+    sub_mode           = optional(string, "hashed_user_id")
+    logout_method      = optional(string, "backchannel")
+    logout_uri         = optional(string)
+    application_name   = string
+    application_slug   = string
+    meta_launch_url    = string
+    meta_description   = string
+    meta_publisher     = string
+    meta_icon          = optional(string, "")
+    open_in_new_tab    = optional(bool, false)
+    policy_engine_mode = optional(string, "any")
+    application_group  = optional(string, "")
   }))
   default = {}
 }
@@ -92,23 +104,15 @@ variable "proxy_providers" {
     external_host         = string
     internal_host         = optional(string, "")
     mode                  = optional(string, "forward_single")
-  }))
-  default = {}
-}
-
-variable "applications" {
-  description = "Map of applications"
-  type = map(object({
-    name               = string
-    slug               = string
-    meta_launch_url    = optional(string, "")
-    meta_description   = optional(string, "")
-    meta_publisher     = optional(string, "")
-    meta_icon          = optional(string, "")
-    provider_id        = optional(number)
-    open_in_new_tab    = optional(bool, false)
-    policy_engine_mode = optional(string, "any")
-    group              = optional(string, "")
+    application_name      = string
+    application_slug      = string
+    meta_launch_url       = string
+    meta_description      = string
+    meta_publisher        = string
+    meta_icon             = optional(string, "")
+    open_in_new_tab       = optional(bool, false)
+    policy_engine_mode    = optional(string, "any")
+    application_group     = optional(string, "")
   }))
   default = {}
 }
