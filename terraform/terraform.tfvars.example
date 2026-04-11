@@ -50,7 +50,6 @@ oauth2_providers = {
   git = {
     name                  = "Provider for Git"
     client_id             = "your-client-id"
-    property_mappings     = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [{ url = "https://git.example.com/user/oauth2/authentik/callback" }]
     application_name      = "Git"
     application_slug      = "git"
@@ -63,7 +62,6 @@ oauth2_providers = {
   graphs = {
     name                  = "Provider for Graphs"
     client_id             = "your-client-id"
-    property_mappings     = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [{ url = "https://graphs.example.com/login/generic_oauth" }]
     logout_method         = "frontchannel"
     logout_uri            = "https://graphs.example.com/logout"
@@ -78,7 +76,6 @@ oauth2_providers = {
   photos = {
     name              = "Provider for Photos"
     client_id         = "your-client-id"
-    property_mappings = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [
       { url = "app.photos:///oauth-callback" },
       { url = "https://photos.example.com/auth/login" },
@@ -97,7 +94,6 @@ oauth2_providers = {
     client_id         = "your-client-id"
     sub_mode          = "user_email"
     logout_uri        = "https://virt.example.com:8006/#"
-    property_mappings = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
     allowed_redirect_uris = [{ url = "https://virt.example.com:8006" }]
     application_name  = "Virt"
     application_slug  = "virt"

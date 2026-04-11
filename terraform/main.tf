@@ -1,12 +1,3 @@
-provider "authentik" {
-  url   = var.authentik_url
-  token = var.authentik_token
-}
-
-data "authentik_certificate_key_pair" "self_signed" {
-  name = "authentik Self-signed Certificate"
-}
-
 resource "authentik_user" "admins" {
   for_each = var.admins
 
@@ -45,13 +36,17 @@ module "oauth2" {
   source   = "./modules/applications/oauth2"
   for_each = var.oauth2_providers
 
-  name                     = each.value.name
-  client_id                = each.value.client_id
-  client_type              = each.value.client_type
-  access_token_validity    = each.value.access_token_validity
-  refresh_token_threshold  = each.value.refresh_token_threshold
-  signing_key              = data.authentik_certificate_key_pair.self_signed.id
-  property_mappings        = each.value.property_mappings
+  name                    = each.value.name
+  client_id               = each.value.client_id
+  client_type             = each.value.client_type
+  access_token_validity   = each.value.access_token_validity
+  refresh_token_threshold = each.value.refresh_token_threshold
+  signing_key             = data.authentik_certificate_key_pair.self_signed.id
+  property_mappings = [
+    data.authentik_property_mapping_provider_scope.openid.id,
+    data.authentik_property_mapping_provider_scope.email.id,
+    data.authentik_property_mapping_provider_scope.profile.id,
+  ]
   allowed_redirect_uris    = each.value.allowed_redirect_uris
   sub_mode                 = each.value.sub_mode
   logout_method            = each.value.logout_method

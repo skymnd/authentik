@@ -49,16 +49,18 @@ applications, and authentication flows.
 
 ## File structure
 
-| File                      | Purpose                                         |
-| ------------------------- | ----------------------------------------------- |
-| `main.tf`                 | Provider config, users, groups, and app modules  |
+| File                      | Purpose                                          |
+| ------------------------- | ------------------------------------------------ |
+| `main.tf`                 | Users, groups, and app modules                   |
+| `provider.tf`             | Authentik provider configuration                 |
+| `data.tf`                 | Data sources (certificate, scope mappings) |
 | `flows.tf`                | Authentication, authorization, and invalidation flows |
 | `variables.tf`            | Input variable definitions                       |
-| `locals.tf`              | Computed group and application memberships        |
-| `versions.tf`            | Terraform and provider version constraints        |
-| `backend.conf`           | S3 backend configuration                          |
+| `locals.tf`               | Computed group and application memberships        |
+| `versions.tf`             | Terraform and provider version constraints        |
+| `backend.conf`            | S3 backend configuration                          |
 | `terraform.tfvars.example`| Example variable values                          |
-| `modules/applications/`  | Reusable modules for OAuth2 and proxy providers   |
+| `modules/applications/`   | Reusable modules for OAuth2 and proxy providers   |
 
 ## Sensitive values
 
