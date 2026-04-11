@@ -3,6 +3,10 @@ provider "authentik" {
   token = var.authentik_token
 }
 
+data "authentik_certificate_key_pair" "self_signed" {
+  name = "authentik Self-signed Certificate"
+}
+
 resource "authentik_user" "admins" {
   for_each = var.admins
 
@@ -46,7 +50,7 @@ module "oauth2" {
   client_type              = each.value.client_type
   access_token_validity    = each.value.access_token_validity
   refresh_token_threshold  = each.value.refresh_token_threshold
-  signing_key              = each.value.signing_key
+  signing_key              = data.authentik_certificate_key_pair.self_signed.id
   property_mappings        = each.value.property_mappings
   allowed_redirect_uris    = each.value.allowed_redirect_uris
   sub_mode                 = each.value.sub_mode

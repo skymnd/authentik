@@ -78,7 +78,6 @@ variable "oauth2_providers" {
       url           = string
       matching_mode = optional(string, "strict")
     })), [])
-    signing_key        = optional(string)
     property_mappings  = optional(list(string), [])
     sub_mode           = optional(string, "hashed_user_id")
     logout_method      = optional(string, "backchannel")
