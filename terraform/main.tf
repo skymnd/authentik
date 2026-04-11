@@ -93,6 +93,12 @@ module "proxy" {
   admin_members            = local.application_admins[each.key]
 }
 
+resource "authentik_outpost" "embedded" {
+  name               = "authentik Embedded Outpost"
+  type               = "proxy"
+  protocol_providers = [for k, v in module.proxy : v.provider_id]
+}
+
 # Standalone Jellyfin application (provider managed outside terraform)
 resource "authentik_application" "jellyfin" {
   name               = "Jellyfin"
