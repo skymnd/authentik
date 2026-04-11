@@ -1,12 +1,6 @@
 resource "random_string" "client_id" {
   length  = 40
   special = false
-
-  lifecycle {
-    ignore_changes = [
-      special
-    ]
-  }
 }
 
 resource "authentik_provider_oauth2" "oauth2" {
