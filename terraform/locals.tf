@@ -1,4 +1,10 @@
 locals {
+  application_groups = {
+    home       = "Available at home/through VPN"
+    everywhere = "Available Everywhere"
+  }
+
+
   group_memberships = {
     for group in keys(var.groups) : group => concat(
       [for key, user in authentik_user.admins : user.id if contains(var.admins[key].groups, group)],

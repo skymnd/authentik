@@ -57,7 +57,7 @@ oauth2_providers = {
     meta_description      = "Remote Code Repositories."
     meta_publisher        = ""
     meta_icon             = "application-icons/git.png"
-    application_group     = "Home"
+    available_everywhere  = false
   }
   graphs = {
     name                  = "Provider for Graphs"
@@ -71,7 +71,7 @@ oauth2_providers = {
     meta_description      = "Dashboards."
     meta_publisher        = ""
     meta_icon             = "application-icons/graphs.svg"
-    application_group     = "Home"
+    available_everywhere  = false
   }
   photos = {
     name              = "Provider for Photos"
@@ -87,7 +87,7 @@ oauth2_providers = {
     meta_description  = "Self-hosted Photos."
     meta_publisher    = ""
     meta_icon         = "application-icons/photos.svg"
-    application_group = "Home"
+    available_everywhere = false
   }
   virt = {
     name              = "Provider for Virt"
@@ -101,7 +101,7 @@ oauth2_providers = {
     meta_description  = "Virtualisation."
     meta_publisher    = ""
     meta_icon         = "application-icons/virt.svg"
-    application_group = "Home"
+    available_everywhere = false
   }
 }
 
@@ -117,7 +117,7 @@ proxy_providers = {
     meta_description      = "Reverse Proxy."
     meta_publisher        = ""
     meta_icon             = "application-icons/proxy.svg"
-    application_group     = "Home"
+    available_everywhere  = false
   }
 }
 

@@ -59,7 +59,7 @@ module "oauth2" {
   meta_icon                = each.value.meta_icon
   open_in_new_tab          = each.value.open_in_new_tab
   policy_engine_mode       = each.value.policy_engine_mode
-  application_group        = each.value.application_group
+  application_group        = each.value.available_everywhere ? local.application_groups.everywhere : local.application_groups.home
   authentication_flow_uuid = authentik_flow.authentication.uuid
   authorization_flow_uuid  = authentik_flow.authorization.uuid
   invalidation_flow_uuid   = authentik_flow.invalidation.uuid
@@ -84,7 +84,7 @@ module "proxy" {
   meta_icon                = each.value.meta_icon
   open_in_new_tab          = each.value.open_in_new_tab
   policy_engine_mode       = each.value.policy_engine_mode
-  application_group        = each.value.application_group
+  application_group        = each.value.available_everywhere ? local.application_groups.everywhere : local.application_groups.home
   authentication_flow_uuid = authentik_flow.authentication.uuid
   authorization_flow_uuid  = authentik_flow.authorization.uuid
   invalidation_flow_uuid   = authentik_flow.invalidation.uuid

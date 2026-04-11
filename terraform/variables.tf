@@ -78,18 +78,18 @@ variable "oauth2_providers" {
       url           = string
       matching_mode = optional(string, "strict")
     })), [])
-    sub_mode           = optional(string, "hashed_user_id")
-    logout_method      = optional(string, "backchannel")
-    logout_uri         = optional(string)
-    application_name   = string
-    application_slug   = string
-    meta_launch_url    = string
-    meta_description   = string
-    meta_publisher     = string
-    meta_icon          = optional(string, "")
-    open_in_new_tab    = optional(bool, false)
-    policy_engine_mode = optional(string, "any")
-    application_group  = optional(string, "")
+    sub_mode             = optional(string, "hashed_user_id")
+    logout_method        = optional(string, "backchannel")
+    logout_uri           = optional(string)
+    application_name     = string
+    application_slug     = string
+    meta_launch_url      = string
+    meta_description     = string
+    meta_publisher       = string
+    meta_icon            = optional(string, "")
+    open_in_new_tab      = optional(bool, false)
+    policy_engine_mode   = optional(string, "any")
+    available_everywhere = optional(bool, false)
   }))
   default = {}
 }
@@ -110,7 +110,7 @@ variable "proxy_providers" {
     meta_icon             = optional(string, "")
     open_in_new_tab       = optional(bool, false)
     policy_engine_mode    = optional(string, "any")
-    application_group     = optional(string, "")
+    available_everywhere  = optional(bool, false)
   }))
   default = {}
 }
