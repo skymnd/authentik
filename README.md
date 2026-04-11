@@ -12,3 +12,10 @@ file.
 
 This is mostly set up using the default settings, but
 port 9300 has been exposed for Prometheus metrics.
+
+## Terraform
+
+Authentik resources (users, groups, applications, and flows) are
+managed as code using Terraform. See the
+[terraform/README.md](terraform/README.md) for setup instructions
+and details on what is managed.
