@@ -37,3 +37,15 @@ resource "authentik_group" "app_admins" {
   name  = "${var.application_name} Admins"
   users = var.admin_members
 }
+
+resource "authentik_policy_binding" "app_users" {
+  target = authentik_application.app.uuid
+  group  = authentik_group.app_users.id
+  order  = 0
+}
+
+resource "authentik_policy_binding" "app_admins" {
+  target = authentik_application.app.uuid
+  group  = authentik_group.app_admins.id
+  order  = 1
+}
