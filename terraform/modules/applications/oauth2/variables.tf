@@ -5,11 +5,6 @@ variable "name" {
   type        = string
 }
 
-variable "client_id" {
-  description = "OAuth2 client ID"
-  type        = string
-}
-
 variable "client_type" {
   description = "OAuth2 client type"
   type        = string

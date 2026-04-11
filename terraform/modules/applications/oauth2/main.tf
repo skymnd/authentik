@@ -1,9 +1,20 @@
+resource "random_string" "client_id" {
+  length  = 40
+  special = false
+
+  lifecycle {
+    ignore_changes = [
+      special
+    ]
+  }
+}
+
 resource "authentik_provider_oauth2" "oauth2" {
   name                    = var.name
   authorization_flow      = var.authorization_flow_uuid
   invalidation_flow       = var.invalidation_flow_uuid
   authentication_flow     = var.authentication_flow_uuid
-  client_id               = var.client_id
+  client_id               = random_string.client_id.result
   client_type             = var.client_type
   access_token_validity   = var.access_token_validity
   refresh_token_threshold = var.refresh_token_threshold

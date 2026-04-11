@@ -37,7 +37,6 @@ module "oauth2" {
   for_each = var.oauth2_providers
 
   name                    = each.value.name
-  client_id               = each.value.client_id
   client_type             = each.value.client_type
   access_token_validity   = each.value.access_token_validity
   refresh_token_threshold = each.value.refresh_token_threshold

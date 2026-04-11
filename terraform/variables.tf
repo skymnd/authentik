@@ -70,7 +70,6 @@ variable "oauth2_providers" {
   description = "Map of OAuth2/OIDC providers"
   type = map(object({
     name                    = string
-    client_id               = string
     client_type             = optional(string, "confidential")
     access_token_validity   = optional(string, "minutes=5")
     refresh_token_threshold = optional(string, "hours=1")
