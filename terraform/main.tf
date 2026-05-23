@@ -97,12 +97,3 @@ resource "authentik_outpost" "embedded" {
   protocol_providers = [for k, v in module.proxy : v.provider_id]
 }
 
-# Standalone Jellyfin application (provider managed outside terraform)
-resource "authentik_application" "jellyfin" {
-  name               = "Jellyfin"
-  slug               = "jellyfin"
-  protocol_provider  = 28
-  policy_engine_mode = "any"
-  group              = "Media"
-}
-
