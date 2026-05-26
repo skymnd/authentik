@@ -41,11 +41,13 @@ module "oauth2" {
   access_token_validity   = each.value.access_token_validity
   refresh_token_threshold = each.value.refresh_token_threshold
   signing_key             = data.authentik_certificate_key_pair.self_signed.id
-  property_mappings = [
+  property_mappings = concat([
     data.authentik_property_mapping_provider_scope.openid.id,
     data.authentik_property_mapping_provider_scope.email.id,
     data.authentik_property_mapping_provider_scope.profile.id,
-  ]
+    ],
+    each.key == "nextcloud" ? [authentik_property_mapping_provider_scope.nextcloud.id] : []
+  )
   allowed_redirect_uris    = each.value.allowed_redirect_uris
   sub_mode                 = each.value.sub_mode
   logout_method            = each.value.logout_method
@@ -95,5 +97,27 @@ resource "authentik_outpost" "embedded" {
   name               = "authentik Embedded Outpost"
   type               = "proxy"
   protocol_providers = [for k, v in module.proxy : v.provider_id]
+}
+
+resource "authentik_property_mapping_provider_scope" "nextcloud" {
+  name       = "Nextcloud Profile"
+  scope_name = "nextcloud"
+  expression = <<EOF
+# Extract all groups the user is a member of
+groups = [group.name for group in user.groups.all()]
+
+# In Nextcloud, administrators must be members of a fixed group called "admin".
+
+# If a user is in "Nextcloud admins", ensure that "admin" is appended to their group list.
+if "Nextcloud Admins" in groups and "admin" not in groups:
+    groups.append("admin")
+
+return {
+    "name": request.user.name,
+    "groups": groups,
+    # Set a quota by using the "nextcloud_quota" property in the user's attributes
+    "quota": user.group_attributes().get("nextcloud_quota", None),
+}
+EOF
 }
 
